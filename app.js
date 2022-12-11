@@ -11,8 +11,6 @@ function formatDate(timestamp) {
     return `${day} ${hours}:${minutes}`;
 }
 
-
-
 function displayTemperature(response) {
 
     let temperatureElement = document.querySelector("#temperature");
@@ -21,18 +19,25 @@ function displayTemperature(response) {
     let humidityElement = document.querySelector("#humidity");
     let windElement = document.querySelector("#wind");
     let dateElement = document.querySelector("#date");
+    let iconElement = document.querySelector("#icon");
+
     temperatureElement.innerHTML = Math.round (response.data.temperature.current);
     cityElement.innerHTML = (response.data.city);
     descriptionElement.innerHTML = (response.data.condition.description);
     humidityElement.innerHTML = Math.round (response.data.temperature.humidity);
     windElement.innerHTML = Math.round(response.data.wind.speed);
     dateElement.innerHTML = formatDate(response.data.time * 1000);
+    iconElement.setAttribute(
+      "src",
+      `https://api.shecodes.io/weather/v1/current?icon={icon}&&key={icon_url}`
+    );
+    iconElement.setAttribute("alt", response.data.condition.description);
 }
 
 
 let apiKey = "49ecec9d222e3fb8o4502323fetf4ac1";
-let apiUrl =
-  "https://api.shecodes.io/weather/v1/current?query=Rome&key=49ecec9d222e3fb8o4502323fetf4ac1&units=metric";
+let city = "Rome";
+let apiUrl = "https://api.shecodes.io/weather/v1/current?query=Rome&key=49ecec9d222e3fb8o4502323fetf4ac1&units=metric";
 
   
   axios.get(apiUrl).then(displayTemperature);
