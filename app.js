@@ -29,10 +29,7 @@ function displayTemperature(response) {
     humidityElement.innerHTML = Math.round (response.data.temperature.humidity);
     windElement.innerHTML = Math.round(response.data.wind.speed);
     dateElement.innerHTML = formatDate(response.data.time * 1000);
-    iconElement.setAttribute(
-      "src",
-      `https://api.shecodes.io/weather/v1/current?query=Rome&icon=${response.data.condition.icon}&key=49ecec9d222e3fb8o4502323fetf4ac1`
-    );
+    iconElement.setAttribute("src",`https://api.shecodes.io/weather/v1/current?query=${city}&icon=${response.data.condition.icon_url}&key=49ecec9d222e3fb8o4502323fetf4ac1`);
     iconElement.setAttribute("alt", response.data.condition.description);
 }
 
