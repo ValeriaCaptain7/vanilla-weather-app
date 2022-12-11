@@ -23,7 +23,6 @@ ul {
 }
 
 li {
-    text-transform: capitalize;
     list-style: none;
     margin: 0;
     padding: 0;
@@ -31,6 +30,10 @@ li {
     font-size: 16px;
     font-weight: 100;
     line-height: 19px;
+}
+
+li ::first-letter {
+    text-transform: capitalize;
 }
 
 p {
@@ -77,4 +80,8 @@ a {
     position: relative;
     font-size: 16px;
     top: -20px;
+}
+
+#description {
+    text-transform: capitalize;
 }
