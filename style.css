@@ -1,5 +1,8 @@
-
-
+.heading {
+  position: relative;
+  top: -10px;
+  left: 20px;
+}
 
 body {
     font-family: 'Space Mono', monospace;
@@ -72,5 +75,5 @@ a {
 .weather-temperature .units {
     position: relative;
     font-size: 16px;
-   top: -15px;
+    top: -20px;
 }
