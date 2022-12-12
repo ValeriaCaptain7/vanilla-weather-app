@@ -29,13 +29,16 @@ function displayTemperature(response) {
     humidityElement.innerHTML = Math.round (response.data.temperature.humidity);
     windElement.innerHTML = Math.round(response.data.wind.speed);
     dateElement.innerHTML = formatDate(response.data.time * 1000);
-    iconElement.setAttribute("src",`https://api.shecodes.io/weather/v1/current?query=${city}&icon=${response.data.condition.icon_url}&key=49ecec9d222e3fb8o4502323fetf4ac1`);
+    iconElement.setAttribute(
+      "src",
+      `http://shecodes-assets.s3.amazonaws.com/api/weather/icons/rain-day.png`
+    );
     iconElement.setAttribute("alt", response.data.condition.description);
 }
 
 function search(city) {
-    let apiKey = "49ecec9d222e3fb8o4502323fetf4ac1";
-    let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
+    let apiKey = "15b6ba0523386a8a73b38b2440a74dea";
+    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
     axios.get(apiUrl).then(displayTemperature);
 }
 
