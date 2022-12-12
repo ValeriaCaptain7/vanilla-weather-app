@@ -31,14 +31,17 @@ function displayTemperature(response) {
     dateElement.innerHTML = formatDate(response.data.time * 1000);
     iconElement.setAttribute(
       "src",
-      `http://shecodes-assets.s3.amazonaws.com/api/weather/icons/rain-day.png`
+      `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
     );
     iconElement.setAttribute("alt", response.data.condition.description);
 }
 
 function search(city) {
     let apiKey = "15b6ba0523386a8a73b38b2440a74dea";
-    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+    let lat = position.coords.latitude;
+    let long = position.coords.longitude;
+    let units = "metric";
+    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${apiKey}&units=${units}`;
     axios.get(apiUrl).then(displayTemperature);
 }
 
