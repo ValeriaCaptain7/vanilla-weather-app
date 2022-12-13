@@ -1,6 +1,9 @@
 function formatDate(timestamp) {
     let date = new Date(timestamp);
     let hours = date.getHours();
+    if (hours < 10) {
+        hours = `0${hours}`;
+    }
     let minutes = date.getMinutes();
     if (minutes < 10) {
         minutes = `0${minutes}`;
@@ -21,14 +24,14 @@ function displayTemperature(response) {
     let dateElement = document.querySelector("#date");
     let iconElement = document.querySelector("#icon");
 
-    celsiusTemperature = response.data.temperature.current;
+    celsiusTemperature = response.data.main.temp;
 
-    temperatureElement.innerHTML = Math.round (response.data.temperature.current);
-    cityElement.innerHTML = (response.data.city);
-    descriptionElement.innerHTML = (response.data.condition.description);
-    humidityElement.innerHTML = Math.round (response.data.temperature.humidity);
+    temperatureElement.innerHTML = Math.round(celsiusTemperature);
+    cityElement.innerHTML = response.data.name;
+    descriptionElement.innerHTML = response.data.weather[0].description;
+    humidityElement.innerHTML = response.data.main.humidity;
     windElement.innerHTML = Math.round(response.data.wind.speed);
-    dateElement.innerHTML = formatDate(response.data.time * 1000);
+    dateElement.innerHTML = formatDate(response.data.dt * 1000);
     iconElement.setAttribute(
       "src",
       `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
@@ -37,11 +40,9 @@ function displayTemperature(response) {
 }
 
 function search(city) {
-    let apiKey = "15b6ba0523386a8a73b38b2440a74dea";
-    let lat = position.coords.latitude;
-    let long = position.coords.longitude;
+    let apiKey = "cb286bad3607984b41ed10c8de5cf00e";
     let units = "metric";
-    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=${apiKey}&units=${units}`;
+    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${units}`;
     axios.get(apiUrl).then(displayTemperature);
 }
 
